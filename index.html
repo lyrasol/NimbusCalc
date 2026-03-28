@@ -3,228 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NimbusCalc Guides — How to Use Health & Fitness Calculators</title>
-  <meta name="description" content="Learn how to use NimbusCalc health calculators: BMI, calorie, body fat, and more. Step-by-step guides and tips for accurate results.">
+  <title>NimbusCalc — Open Source Calculator Tools | BMI, Calorie, Body Fat & More</title>
+  <meta name="description" content="NimbusCalc open-source project: free BMI calculator, calorie counter, body fat estimator, and more. Contribute on GitHub or use the tools online.">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="NimbusCalc Guides — How to Use Health & Fitness Calculators">
-  <meta property="og:description" content="Step-by-step tutorials for NimbusCalc health tools. Get the most out of our free calculators.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nimbuscalc.pages.dev/">
-  <link rel="canonical" href="https://nimbuscalc.pages.dev/">
+  <meta property="og:title" content="NimbusCalc — Open Source Calculator Tools">
+  <meta property="og:description" content="Free and open-source calculators for health, fitness, and finance. Contribute or use online.">
+  <link rel="canonical" href="https://lyrasol.github.io/NimbusCalc/">
   <link rel="shortcut icon" href="https://www.nimbuscalc.com/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #1f2937;
-      line-height: 1.5;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-    .navbar {
-      background: white;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      padding: 1rem 0;
-    }
-    .navbar-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: #1f2937;
-    }
-    .logo-icon {
-      width: 42px;
-    }
-    .logo-icon img {
-      width: 100%;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: #7F56D9;
-      color: white;
-    }
-    .btn-primary:hover {
-      background: #6b46c1;
-    }
-    .btn-outline {
-      border: 1px solid #e5e7eb;
-      background: white;
-      color: #7F56D9;
-    }
-    .hero {
-      background: linear-gradient(135deg, #f5f3ff 0%, #ffffff 100%);
-      text-align: center;
-      padding: 4rem 1rem;
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .text-gradient {
-      background: linear-gradient(135deg, #7F56D9, #14B8A6);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero p {
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      color: #6b7280;
-      font-size: 1.1rem;
-    }
-    .section {
-      padding: 3rem 0;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .section-header h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .guide-card {
-      background: #f9fafb;
-      border-radius: 24px;
-      padding: 1.5rem;
-      transition: transform 0.2s;
-    }
-    .guide-card:hover {
-      transform: translateY(-4px);
-    }
-    .guide-card h3 {
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .guide-card p {
-      color: #6b7280;
-      margin-bottom: 1rem;
-    }
-    .step {
-      margin: 1rem 0;
-      padding-left: 1rem;
-      border-left: 2px solid #7F56D9;
-
-    }
-    .footer {
-      background: #1f2937;
-      color: #e5e7eb;
-      padding: 2rem 0;
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .footer a {
-      color: #9b7fe8;
-      text-decoration: none;
-    }
-    .quick-tool-card {
-      background: linear-gradient(135deg, #f8f9ff, #ffffff);
-      border-radius: 24px;
-      padding: 2rem;
-      margin: 2rem 0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-    .bmi-input-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: flex-end;
-    }
-    input, select {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      font-family: inherit;
-    }
-    .bmi-result {
-      background: #7F56D9;
-      color: white;
-      border-radius: 20px;
-      padding: 1rem 1.5rem;
-      text-align: center;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:linear-gradient(135deg,#f9fafb 0%,#fff 100%); color:#1f2937; line-height:1.5; }
+    .container { max-width:1200px; margin:0 auto; padding:0 1.5rem; }
+    .navbar { background:white; box-shadow:0 1px 3px rgba(0,0,0,0.05); padding:1rem 0; }
+    .navbar-container { max-width:1200px; margin:0 auto; padding:0 1.5rem; display:flex; justify-content:space-between; align-items:center; }
+    .logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; font-weight:700; font-size:1.25rem; color:#1f2937; }
+    .logo-icon { width:42px; }
+    .logo-icon img { width:100%; }
+    .btn { display:inline-block; padding:0.75rem 1.5rem; border-radius:30px; text-decoration:none; font-weight:500; transition:all 0.2s; }
+    .btn-primary { background:#7F56D9; color:white; border:none; }
+    .btn-primary:hover { background:#6b46c1; }
+    .btn-secondary { background:white; color:#7F56D9; border:1px solid #e5e7eb; }
+    .btn-secondary:hover { background:#f9fafb; }
+    .hero { text-align:center; padding:4rem 1rem; }
+    .hero h1 { font-size:3rem; margin-bottom:1rem; }
+    .text-gradient { background:linear-gradient(135deg,#7F56D9,#14B8A6); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero p { max-width:600px; margin:0 auto 2rem; color:#6b7280; }
+    .section { padding:4rem 0; }
+    .section-header { text-align:center; margin-bottom:2.5rem; }
+    .section-header h2 { font-size:2rem; margin-bottom:0.5rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; }
+    .card { background:white; border-radius:24px; padding:1.5rem; box-shadow:0 10px 25px -5px rgba(0,0,0,0.05); transition:transform 0.2s; }
+    .card:hover { transform:translateY(-4px); }
+    .card i { font-size:2rem; color:#7F56D9; margin-bottom:1rem; }
+    .card h3 { margin-bottom:0.5rem; }
+    .card p { color:#6b7280; font-size:0.9rem; margin-bottom:1rem; }
+    .card a { color:#7F56D9; text-decoration:none; font-weight:500; }
+    .footer { background:#1f2937; color:#e5e7eb; padding:2rem 0; text-align:center; margin-top:2rem; }
+    .footer a { color:#9b7fe8; text-decoration:none; }
+    .quick-tool-card { background:linear-gradient(135deg,#f8f9ff,#ffffff); border-radius:24px; padding:2rem; margin:2rem 0; box-shadow:0 10px 30px rgba(0,0,0,0.05); }
+    .bmi-input-group { display:flex; flex-wrap:wrap; gap:1.5rem; align-items:flex-end; }
+    .bmi-input-group > div { flex:1 1 200px; }
+    input, select { width:100%; padding:0.75rem; border:1px solid #e5e7eb; border-radius:12px; font-family:inherit; }
+    .bmi-result { background:#7F56D9; color:white; border-radius:20px; padding:1rem 1.5rem; text-align:center; }
+    .tools-row { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-top:1.5rem; }
+    .tools-row a { background:#f3f4f6; padding:0.5rem 1rem; border-radius:40px; font-size:0.9rem; color:#1f2937; text-decoration:none; transition:background 0.2s; }
+    .tools-row a:hover { background:#e5e7eb; }
   </style>
 </head>
 <body>
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="https://nimbuscalc.pages.dev/" class="logo">
+      <a href="https://lyrasol.github.io/NimbusCalc/" class="logo">
         <div class="logo-icon"><img alt="NimbusCalc" src="https://www.nimbuscalc.com/css/logo.png" width="42" /></div>
-        <span>NimbusCalc Guides</span>
+        <span>NimbusCalc</span>
       </a>
-      <a href="https://www.nimbuscalc.com/" class="btn btn-primary" style="padding: 0.5rem 1rem;">Explore All Tools →</a>
+      <a href="https://www.nimbuscalc.com/" class="btn btn-primary" style="padding:0.5rem 1rem;">Visit Main Site →</a>
     </div>
   </nav>
 
   <main>
     <div class="hero">
-      <h1>How to Use <span class="text-gradient">NimbusCalc</span> Health Tools</h1>
-      <p>Step‑by‑step guides to get accurate results for BMI, calorie intake, body fat, and more. All calculators are free and easy to use.</p>
-      <a href="https://www.nimbuscalc.com/" class="btn btn-primary">Start Calculating Now</a>
+      <h1>Open Source <span class="text-gradient">Calculators</span></h1>
+      <p>NimbusCalc is an open‑source project providing free, accurate calculators for health, fitness, and daily life. Explore the tools, contribute code, or use them online.</p>
+      <div class="hero-buttons">
+        <a href="https://www.nimbuscalc.com/" class="btn btn-primary">✨ Try All 1198+ Tools</a>
+        <a href="https://github.com/lyrasol/NimbusCalc" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> GitHub Repository</a>
+      </div>
     </div>
 
     <div class="container">
-      <!-- Interactive BMI demo with instructions -->
+      <!-- Quick BMI Demo -->
       <div class="quick-tool-card">
-        <h2>⚡ BMI Calculator – How It Works</h2>
-        <p>Your Body Mass Index (BMI) helps assess if your weight is in a healthy range. Use the interactive tool below:</p>
+        <h2>⚡ Quick BMI Calculator (Live Demo)</h2>
+        <p>Enter your height and weight to see your BMI instantly. This is one of our many open‑source tools.</p>
         <div class="bmi-input-group">
           <div>
             <label>Height</label>
-            <div style="display: flex; gap: 0.5rem;">
+            <div style="display:flex; gap:0.5rem;">
               <input type="number" id="bmi-height" value="170" style="flex:2;">
-              <select id="bmi-height-unit" style="flex:1;">
-                <option value="cm">cm</option>
-                <option value="ft">ft/in</option>
-              </select>
+              <select id="bmi-height-unit" style="flex:1;"><option value="cm">cm</option><option value="ft">ft/in</option></select>
             </div>
           </div>
           <div>
             <label>Weight</label>
-            <div style="display: flex; gap: 0.5rem;">
+            <div style="display:flex; gap:0.5rem;">
               <input type="number" id="bmi-weight" value="70" style="flex:2;">
-              <select id="bmi-weight-unit" style="flex:1;">
-                <option value="kg">kg</option>
-                <option value="lb">lb</option>
-              </select>
+              <select id="bmi-weight-unit" style="flex:1;"><option value="kg">kg</option><option value="lb">lb</option></select>
             </div>
           </div>
           <div>
@@ -235,75 +103,81 @@
             </div>
           </div>
         </div>
-        <div class="step" style="margin-top: 1.5rem;">
-          <strong>📌 How to interpret:</strong> Underweight (<18.5), Normal (18.5–24.9), Overweight (25–29.9), Obese (≥30).<br>
-          For personalized advice, visit <a href="https://www.nimbuscalc.com/">NimbusCalc’s full BMI calculator</a>.
-        </div>
+        <p style="margin-top:1rem; font-size:0.9rem;">📊 <strong>Learn more:</strong> <a href="https://www.nimbuscalc.com/calculators/body-composition/bmi-calculator/">Full BMI Calculator with detailed analysis</a> | <a href="https://www.nimbuscalc.com/calculators/body-composition/body-fat-calculator/">Body Fat Calculator</a></p>
       </div>
 
       <div class="section">
         <div class="section-header">
-          <h2>Popular Guides</h2>
-          <p>Learn to use our most‑used tools</p>
+          <h2>Featured Open‑Source Tools</h2>
+          <p>Check out these popular calculators – all available for free on NimbusCalc</p>
         </div>
         <div class="grid">
-          <div class="guide-card">
-            <h3><i class="fas fa-fire"></i> Calorie Calculator</h3>
-            <p>Estimate your daily calorie needs based on age, gender, activity level, and goals. Perfect for weight management.</p>
-            <div class="step">✔️ Enter your details → Get maintenance, weight loss, or gain calories.</div>
-            <a href="https://www.nimbuscalc.com/calculators/nutrition/calorie-calculator/" target="_blank" style="color:#7F56D9;">Use the tool →</a>
+          <div class="card">
+            <i class="fas fa-fire"></i>
+            <h3>Calorie Calculator</h3>
+            <p>Estimate daily calorie needs for weight loss, maintenance, or gain.</p>
+            <a href="https://www.nimbuscalc.com/calculators/nutrition/calorie-calculator/">Calculate calories →</a>
           </div>
-          <div class="guide-card">
-            <h3><i class="fas fa-percentage"></i> Body Fat Calculator</h3>
-            <p>Measure body fat percentage using circumference or U.S. Navy method. Understand your fitness level.</p>
-            <div class="step">✔️ Input measurements → Get body fat % and lean mass.</div>
-            <a href="https://www.nimbuscalc.com/calculators/body-composition/body-fat-calculator/" target="_blank" style="color:#7F56D9;">Try it now →</a>
+          <div class="card">
+            <i class="fas fa-heartbeat"></i>
+            <h3>BMR & TDEE</h3>
+            <p>Basal Metabolic Rate and Total Daily Energy Expenditure for diet planning.</p>
+            <a href="https://www.nimbuscalc.com/calculators/nutrition/bmr-calculator/">Calculate BMR →</a>
           </div>
-          <div class="guide-card">
-            <h3><i class="fas fa-heartbeat"></i> BMR & TDEE</h3>
-            <p>Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) are essential for diet planning.</p>
-            <div class="step">✔️ Get BMR → Multiply by activity factor → Your TDEE.</div>
-            <a href="https://www.nimbuscalc.com/calculators/nutrition/bmr-calculator/" target="_blank" style="color:#7F56D9;">Calculate BMR →</a>
+          <div class="card">
+            <i class="fas fa-dumbbell"></i>
+            <h3>One Rep Max</h3>
+            <p>Estimate your maximum lifting capacity for strength training.</p>
+            <a href="https://www.nimbuscalc.com/calculators/fitness/one-rep-max-calculator/">Calculate 1RM →</a>
           </div>
-        </div>
-      </div>
-
-      <div class="section" style="background: #f9fafb; border-radius: 24px; padding: 2rem; margin: 2rem 0;">
-        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem;">
-          <div>
-            <h2 style="margin-bottom: 0.5rem;">Ready to explore all calculators?</h2>
-            <p style="color: #6b7280;">Over 1198 tools for health, finance, fitness, and more – all free.</p>
-          </div>
-          <a href="https://www.nimbuscalc.com/" class="btn btn-primary">Visit NimbusCalc.com →</a>
         </div>
       </div>
 
       <div class="section">
         <div class="section-header">
-          <h2>Frequently Asked Questions</h2>
+          <h2>Why Contribute?</h2>
+          <p>Help build free tools that millions rely on</p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-          <div>
-            <h3>Are the calculators really free?</h3>
-            <p>Yes, 100% free. No sign‑ups, no hidden fees. All tools are open‑source and accessible to everyone.</p>
+        <div class="grid">
+          <div class="card">
+            <i class="fas fa-code"></i>
+            <h3>Modern Tech Stack</h3>
+            <p>HTML5, CSS3, JavaScript – clean, readable code. Perfect for learning or contributing.</p>
+            <a href="https://github.com/lyrasol/NimbusCalc" target="_blank">Fork on GitHub →</a>
           </div>
-          <div>
-            <h3>How accurate are the results?</h3>
-            <p>Our calculators use validated formulas (e.g., Mifflin‑St Jeor for BMR, CDC guidelines for BMI). For medical decisions, consult a professional.</p>
+          <div class="card">
+            <i class="fas fa-users"></i>
+            <h3>Community Driven</h3>
+            <p>Join developers, designers, and health experts to improve over 1198 calculators.</p>
+            <a href="https://www.nimbuscalc.com/contact/">Get involved →</a>
           </div>
-          <div>
-            <h3>Can I suggest a new calculator?</h3>
-            <p>Absolutely! Visit our <a href="https://github.com/lyrasol/NimbusCalc" target="_blank">GitHub repository</a> or contact us via the main site.</p>
+          <div class="card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Real‑World Impact</h3>
+            <p>Your contributions help people make informed decisions about health, finance, and fitness.</p>
           </div>
         </div>
+      </div>
+
+      <!-- More internal links -->
+      <div style="background:#f9fafb; border-radius:24px; padding:2rem; text-align:center; margin:2rem 0;">
+        <h3>Explore All Calculator Categories</h3>
+        <div class="tools-row">
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/">Body Composition</a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/">Fitness</a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/">Nutrition</a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/">Pregnancy Health</a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/">Utilities</a>
+          <a href="https://www.nimbuscalc.com/calculators/financial-calculators/">Financial</a>
+        </div>
+        <p style="margin-top:1.5rem;">👉 <a href="https://www.nimbuscalc.com/" class="btn btn-primary">Visit the full NimbusCalc website</a></p>
       </div>
     </div>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>© 2026 <a href="https://www.nimbuscalc.com">NimbusCalc</a> – Free Online Calculators</p>
-      <p><a href="https://www.nimbuscalc.com/about/">About</a> · <a href="https://www.nimbuscalc.com/privacy/">Privacy</a> · <a href="https://www.nimbuscalc.com/terms/">Terms</a> · <a href="https://lyrasol.github.io/NimbusCalc/">Open Source Calculators</a></p>
+      <p>© 2026 <a href="https://www.nimbuscalc.com">NimbusCalc</a> – Open Source Project | <a href="https://github.com/lyrasol/NimbusCalc" target="_blank">GitHub</a> | <a href="https://www.nimbuscalc.com/privacy/">Privacy</a> | <a href="https://nimbuscalc.pages.dev/">NimbusCalc Guides</a></p>
     </div>
   </footer>
 
@@ -315,16 +189,12 @@
       const weightUnit = document.getElementById('bmi-weight-unit');
       const resultSpan = document.getElementById('bmi-result');
       const categorySpan = document.getElementById('bmi-category');
-
       function computeBMI() {
         let h = parseFloat(heightInput.value) || 0;
         let w = parseFloat(weightInput.value) || 0;
-
         if (heightUnit.value === 'cm') h = h / 100;
         else if (heightUnit.value === 'ft') h = h * 0.0254;
-
         if (weightUnit.value === 'lb') w = w * 0.453592;
-
         if (h > 0 && w > 0) {
           const bmi = w / (h * h);
           resultSpan.textContent = bmi.toFixed(1);
@@ -337,11 +207,7 @@
           categorySpan.textContent = 'Invalid input';
         }
       }
-
-      [heightInput, weightInput, heightUnit, weightUnit].forEach(el => {
-        el.addEventListener('input', computeBMI);
-        el.addEventListener('change', computeBMI);
-      });
+      [heightInput, weightInput, heightUnit, weightUnit].forEach(el => el.addEventListener('input', computeBMI));
       computeBMI();
     })();
   </script>
