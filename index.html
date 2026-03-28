@@ -1,0 +1,1277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NimbusCalc | Free Online Calculators for Health, Finance & Daily Life</title>
+  <meta name="description" content="NimbusCalc offers free online calculators including BMI, calorie, mortgage, and scientific tools. Fast, accurate, and easy to use. Calculate anything instantly!">
+  <meta name="keywords" content="calculator, online calculator, BMI calculator, calorie calculator, mortgage calculator, health calculator, finance calculator, free calculator">
+  <meta name="author" content="NimbusCalc">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="NimbusCalc | Free Online Calculators">
+  <meta property="og:description" content="Free online calculators for health, finance, and daily life. Fast, accurate, and easy to use!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nimbuscalc.com">
+  <meta property="og:image" content="https://www.nimbuscalc.com/images/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NimbusCalc | Free Online Calculators">
+  <meta name="twitter:description" content="Free online calculators for health, finance, and daily life.">
+  <link rel="canonical" href="https://www.nimbuscalc.com">
+  <link rel="shortcut icon" href="https://www.nimbuscalc.com/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://www.nimbuscalc.com/css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NimbusCalc",
+    "url": "https://www.nimbuscalc.com",
+    "description": "free online calculators for health, finance, and daily life",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.nimbuscalc.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  </head>
+<body>
+  
+  <nav class="navbar">
+    <div class="navbar-container">
+        <a href="https://www.nimbuscalc.com/" class="logo">
+            <div class="logo-icon"><img alt="NimbusCalc" src="https://www.nimbuscalc.com/css/logo.png" width="42" /></div>
+            <span>NimbusCalc</span>
+        </a>
+
+        <ul class="nav-links">
+                                                                        <li><a href="https://www.nimbuscalc.com/calculators/body-composition/">Body Composition</a></li>
+                                                                                <li><a href="https://www.nimbuscalc.com/calculators/fitness/">Fitness</a></li>
+                                                                                <li><a href="https://www.nimbuscalc.com/calculators/nutrition/">Nutrition</a></li>
+                                                                                <li><a href="https://www.nimbuscalc.com/calculators/pregnancy-health/">Pregnancy Health</a></li>
+                                                                                <li><a href="https://www.nimbuscalc.com/calculators/utilities/">Utilities</a></li>
+                                                                                <li><a href="https://www.nimbuscalc.com/calculators/financial-calculators/">Financial Calculators</a></li>
+                                                                                <li><a href="https://www.nimbuscalc.com/tool-category/financial-metrics-business-calculators/">Financial Metrics &amp; Business Calculators</a></li>
+                                                        </ul>
+
+        <div class="nav-search">
+                        <button id="nav-dashboard-btn" class="nav-icon-btn" title="My Dashboard">
+                <i class="fas fa-user-circle"></i>
+            </button>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <ul class="mobile-nav-links">
+                                                        <li><a href="https://www.nimbuscalc.com/calculators/body-composition/">Body Composition</a></li>
+                                                                <li><a href="https://www.nimbuscalc.com/calculators/fitness/">Fitness</a></li>
+                                                                <li><a href="https://www.nimbuscalc.com/calculators/nutrition/">Nutrition</a></li>
+                                                                <li><a href="https://www.nimbuscalc.com/calculators/pregnancy-health/">Pregnancy Health</a></li>
+                                                                <li><a href="https://www.nimbuscalc.com/calculators/utilities/">Utilities</a></li>
+                                                                <li><a href="https://www.nimbuscalc.com/calculators/financial-calculators/">Financial Calculators</a></li>
+                                                                <li><a href="https://www.nimbuscalc.com/tool-category/financial-metrics-business-calculators/">Financial Metrics &amp; Business Calculators</a></li>
+                                        </ul>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 
+    const favoriteBtn = document.getElementById('nav-favorite-btn');
+    if (favoriteBtn) {
+        const postId = favoriteBtn.dataset.postId;
+        let isSaved = favoriteBtn.dataset.saved === '1';
+        const ajaxUrl = 'https://www.nimbuscalc.com/wp-admin/admin-ajax.php';
+        const nonce = favoriteBtn.dataset.nonce;
+
+        function updateFavoriteUI(saved) {
+            if (saved) {
+                favoriteBtn.dataset.saved = '1';
+                favoriteBtn.setAttribute('title', 'Saved');
+                isSaved = true;
+            } else {
+                favoriteBtn.dataset.saved = '0';
+                favoriteBtn.setAttribute('title', 'Save to favorites');
+                isSaved = false;
+            }
+        }
+
+        favoriteBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const action = isSaved ? 'remove_saved_tool' : 'save_tool';
+
+            const formData = new URLSearchParams();
+            formData.append('action', action);
+            formData.append('tool_id', postId);
+            formData.append('nonce', nonce);
+
+            fetch(ajaxUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateFavoriteUI(!isSaved);
+                } else {
+                    if (data.data && data.data.includes('logged in')) {
+                        if (confirm('Please log in to save favorites. Go to login page?')) {
+                            window.location.href = 'https://www.nimbuscalc.com/login/';
+                        }
+                    } else {
+                        alert('Error: ' + (data.data || 'Operation failed'));
+                    }
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Network error. Please try again.');
+            });
+        });
+    }
+
+    // 
+    const dashboardBtn = document.getElementById('nav-dashboard-btn');
+    if (dashboardBtn) {
+        dashboardBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+                            window.location.href = 'https://www.nimbuscalc.com/member-dashboard/';
+                    });
+    }
+});
+</script>  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-particles"></div>
+    </div>
+    
+    <div class="hero-content">
+      <h1>Smart Calculators for <span class="text-gradient">Every Need</span></h1>
+      <p>Free, fast, and accurate tools for health, fitness, nutrition, and daily life. Calculate anything instantly with our collection of 1198+ specialized calculators.</p> 
+      <div class="hero-buttons">
+        <a href="https://www.nimbuscalc.com/#categories" class="btn btn-primary">
+          <i class="fas fa-calculator"></i>
+          Explore Calculators
+        </a>
+        <a href="https://www.nimbuscalc.com/#featured" class="btn btn-secondary">
+          <i class="fas fa-star"></i>
+          Popular Tools
+        </a>
+      </div>
+      
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">1198+</div> 
+          <div class="stat-label">Calculators</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">30</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Free</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section" style="background: #fff; padding-top: 0;">
+    <div class="container">
+      <div class="quick-tool-card" style="background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%); border-radius: 24px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+        <h2 style="margin-bottom: 0.5rem;">⚡ Quick BMI Calculator</h2>
+        <p style="color: #6b7280; margin-bottom: 1.5rem;">Enter your height and weight to get your BMI instantly</p>
+        
+        <div class="bmi-input-group" style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-end;">
+          
+          <div style="flex: 1 1 200px;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Height</label>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="number" id="bmi-height" value="170" style="flex: 2; padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 12px;">
+              <select id="bmi-height-unit" style="flex: 1; padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 12px; background: white;">
+                <option value="cm">cm</option>
+                <option value="ft">ft/in</option>
+              </select>
+            </div>
+          </div>
+          
+          <div style="flex: 1 1 200px;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Weight</label>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="number" id="bmi-weight" value="70" style="flex: 2; padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 12px;">
+              <select id="bmi-weight-unit" style="flex: 1; padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 12px; background: white;">
+                <option value="kg">kg</option>
+                <option value="lb">lb</option>
+              </select>
+            </div>
+          </div>
+          
+          <div style="flex: 0 0 auto; min-width: 180px;">
+            <div style="background: #7F56D9; color: white; border-radius: 20px; padding: 1rem 1.5rem; text-align: center;">
+              <div style="font-size: 0.9rem; opacity: 0.9;">Your BMI</div>
+              <div style="font-size: 2.5rem; font-weight: 700; line-height: 1.2;" id="bmi-result">24.2</div>
+              <div style="font-size: 0.9rem;" id="bmi-category">Normal</div>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+          (function() {
+            const heightInput = document.getElementById('bmi-height');
+            const weightInput = document.getElementById('bmi-weight');
+            const heightUnit = document.getElementById('bmi-height-unit');
+            const weightUnit = document.getElementById('bmi-weight-unit');
+            const resultSpan = document.getElementById('bmi-result');
+            const categorySpan = document.getElementById('bmi-category');
+
+            function computeBMI() {
+              let h = parseFloat(heightInput.value) || 0;
+              let w = parseFloat(weightInput.value) || 0;
+              
+              if (heightUnit.value === 'cm') {
+                h = h / 100;
+              } else if (heightUnit.value === 'ft') {
+                h = h * 0.0254;
+              }
+              
+              if (weightUnit.value === 'lb') {
+                w = w * 0.453592;
+              }
+              
+              if (h > 0 && w > 0) {
+                const bmi = w / (h * h);
+                resultSpan.textContent = bmi.toFixed(1);
+                if (bmi < 18.5) {
+                  categorySpan.textContent = 'Underweight';
+                } else if (bmi < 24) {
+                  categorySpan.textContent = 'Normal';
+                } else if (bmi < 28) {
+                  categorySpan.textContent = 'Overweight';
+                } else {
+                  categorySpan.textContent = 'Obese';
+                }
+              } else {
+                resultSpan.textContent = '—';
+                categorySpan.textContent = 'Invalid input';
+              }
+            }
+
+            [heightInput, weightInput, heightUnit, weightUnit].forEach(el => {
+              el.addEventListener('input', computeBMI);
+              el.addEventListener('change', computeBMI);
+            });
+            computeBMI();
+          })();
+        </script>
+      </div>
+    </div>
+  </section>
+  
+
+  
+  <section id="featured" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Popular Calculators</h2>
+        <p>Most used calculators by our visitors</p>
+      </div>
+      
+      
+      <div class="ad-container inline-ad" style="position: relative;">
+        <span class="ad-label"><script src="https://www.nimbuscalc.com/js/caletop.js"></script></span>
+      </div>
+      
+      <div class="calculators-grid">
+        <a href="https://www.nimbuscalc.com/calculators/body-composition/bmi-calculator/" class="calculator-card">
+          <div class="calculator-icon"><i class="fas fa-weight"></i></div>
+          <div class="calculator-info">
+            <h4>BMI Calculator</h4>
+            <p>Calculate Body Mass Index and check your weight category</p>
+          </div>
+        </a>
+        
+        <a href="https://www.nimbuscalc.com/calculators/nutrition/calorie-calculator/" class="calculator-card">
+          <div class="calculator-icon"><i class="fas fa-fire"></i></div>
+          <div class="calculator-info">
+            <h4>Calorie Calculator</h4>
+            <p>Calculate daily calorie needs for weight goals</p>
+          </div>
+        </a>
+        
+        <a href="https://www.nimbuscalc.com/calculators/nutrition/bmr-calculator/" class="calculator-card">
+          <div class="calculator-icon"><i class="fas fa-heartbeat"></i></div>
+          <div class="calculator-info">
+            <h4>BMR Calculator</h4>
+            <p>Basal Metabolic Rate - calories burned at rest</p>
+          </div>
+        </a>
+        
+        <a href="https://www.nimbuscalc.com/calculators/body-composition/body-fat-calculator/" class="calculator-card">
+          <div class="calculator-icon"><i class="fas fa-percentage"></i></div>
+          <div class="calculator-info">
+            <h4>Body Fat Calculator</h4>
+            <p>Estimate your body fat percentage</p>
+          </div>
+        </a>
+        
+        <a href="https://www.nimbuscalc.com/calculators/fitness/one-rep-max-calculator/" class="calculator-card">
+          <div class="calculator-icon"><i class="fas fa-dumbbell"></i></div>
+          <div class="calculator-info">
+            <h4>One Rep Max Calculator</h4>
+            <p>Calculate your maximum lifting capacity</p>
+          </div>
+        </a>
+        
+        <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/due-date-calculator/" class="calculator-card">
+          <div class="calculator-icon"><i class="fas fa-baby"></i></div>
+          <div class="calculator-info">
+            <h4>Due Date Calculator</h4>
+            <p>Estimate your baby's arrival date</p>
+          </div>
+        </a>
+        
+        <a href="https://www.nimbuscalc.com/calculators/fitness/pace-calculator/" class="calculator-card">
+          <div class="calculator-icon"><i class="fas fa-running"></i></div>
+          <div class="calculator-info">
+            <h4>Pace Calculator</h4>
+            <p>Running pace and speed calculations</p>
+          </div>
+        </a>
+        
+        <a href="https://www.nimbuscalc.com/calculators/utilities/age-calculator/" class="calculator-card">
+          <div class="calculator-icon"><i class="fas fa-birthday-cake"></i></div>
+          <div class="calculator-info">
+            <h4>Age Calculator</h4>
+            <p>Calculate exact age in years, months, days</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+<section id="categories" class="section" style="background: var(--light-bg-alt);">
+  <div class="container">
+    <div class="section-header">
+      <h2>Browse by Category</h2>
+      <p>Find the perfect calculator for your needs</p>
+    </div>
+
+    <div class="categories-grid">
+                <div class="category-card">
+            <div class="category-icon" style="background: linear-gradient(135deg, #7F56D9 0%, #936aed 100%);">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3><a href="https://www.nimbuscalc.com/calculators/body-composition/">Body Composition</a></h3>
+            <p>Track and analyze your body composition with our easy-to-use calculators. Measure body fat, muscle mass,...</p>
+            <span class="category-count"><i class="fas fa-calculator"></i> 28 Calculators</span>
+          </div>
+                    <div class="category-card">
+            <div class="category-icon" style="background: linear-gradient(135deg, #7F56D9 0%, #936aed 100%);">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h3><a href="https://www.nimbuscalc.com/calculators/financial-calculators/">Financial Calculators</a></h3>
+            <p>Plan your finances with confidence using our free financial calculators. Use our mortgage, loan, retirement,...</p>
+            <span class="category-count"><i class="fas fa-calculator"></i> 28 Calculators</span>
+          </div>
+                    <div class="category-card">
+            <div class="category-icon" style="background: linear-gradient(135deg, #3B82F6 0%, #4f96ff 100%);">
+              <i class="fas fa-running"></i>
+            </div>
+            <h3><a href="https://www.nimbuscalc.com/calculators/fitness/">Fitness</a></h3>
+            <p>Calculate calories, BMI, macros, and heart rate for your fitness goals. Get personalized data to...</p>
+            <span class="category-count"><i class="fas fa-calculator"></i> 21 Calculators</span>
+          </div>
+                    <div class="category-card">
+            <div class="category-icon" style="background: linear-gradient(135deg, #14B8A6 0%, #28ccba 100%);">
+              <i class="fas fa-apple-alt"></i>
+            </div>
+            <h3><a href="https://www.nimbuscalc.com/calculators/nutrition/">Nutrition</a></h3>
+            <p>Calculate calories, macros, and essential nutrients for your dietary needs. Get personalized data to optimize...</p>
+            <span class="category-count"><i class="fas fa-calculator"></i> 29 Calculators</span>
+          </div>
+                    <div class="category-card">
+            <div class="category-icon" style="background: linear-gradient(135deg, #EC4899 0%, #ff5cad 100%);">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <h3><a href="https://www.nimbuscalc.com/calculators/pregnancy-health/">Pregnancy Health</a></h3>
+            <p>Track your pregnancy health with due date calculators, week-by-week trackers, and fetal development tools. Monitor...</p>
+            <span class="category-count"><i class="fas fa-calculator"></i> 31 Calculators</span>
+          </div>
+                    <div class="category-card">
+            <div class="category-icon" style="background: linear-gradient(135deg, #F97316 0%, #ff872a 100%);">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h3><a href="https://www.nimbuscalc.com/calculators/utilities/">Utilities</a></h3>
+            <p>Access free utilities for everyday calculations, including date calculators, unit converters, time zone tools, and...</p>
+            <span class="category-count"><i class="fas fa-calculator"></i> 23 Calculators</span>
+          </div>
+              </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>New Tools</h2>
+      <p>Check out our latest additions</p>
+    </div>
+    
+    <div class="calculators-grid">
+                <a href="https://www.nimbuscalc.com/tool/cac-calculator-customer-acquisition-cost-tool/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calculator"></i></div>
+            <div class="calculator-info">
+              <h4>CAC Calculator: Customer Acquisition Cost Tool</h4>
+              <p>Calculate customer acquisition cost (CAC) for your business. Analyze marketing...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/customer-lifetime-value-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-weight-scale"></i></div>
+            <div class="calculator-info">
+              <h4>Customer Lifetime Value Calculator</h4>
+              <p>Calculate customer lifetime value (CLV / LTV) with our free...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/saas-pricing-calculator-subscription-cost-mrr-tool/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-heart-pulse"></i></div>
+            <div class="calculator-info">
+              <h4>SaaS Pricing Calculator: Subscription Cost &#038; MRR Tool</h4>
+              <p>Calculate SaaS subscription costs, MRR, ARR, and per-seat pricing. Compare...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/cogs-calculator-cost-of-goods-sold-gross-margin-tool/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-dumbbell"></i></div>
+            <div class="calculator-info">
+              <h4>COGS Calculator: Cost of Goods Sold &#038; Gross Margin Tool</h4>
+              <p>Calculate Cost of Goods Sold (COGS), gross profit, and margin....</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/calculators/utilities/comprehensive-iq-test-official-free-premium-assessment/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-apple-alt"></i></div>
+            <div class="calculator-info">
+              <h4>Comprehensive IQ Test: Official Free &#038; Premium Assessment</h4>
+              <p>Take the official NimbusCalc IQ Test – 20 free questions...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/markup-vs-margin-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-baby"></i></div>
+            <div class="calculator-info">
+              <h4>Markup vs Margin Calculator</h4>
+              <p>Compare markup and margin instantly. Convert between markup and margin,...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/profit-margin-calculator-ecommerce-profitability-tool/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-ruler"></i></div>
+            <div class="calculator-info">
+              <h4>Profit Margin Calculator | Ecommerce Profitability Tool</h4>
+              <p>Calculate profit margin, gross profit, and optimal selling price for...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/break-even-calculator-business-profitability-tool/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-clock"></i></div>
+            <div class="calculator-info">
+              <h4>Break‑even Calculator: Business Profitability Tool</h4>
+              <p>Calculate the break-even point for your business – units to...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/ai-image-watermark-remover-remove-watermark-from-photos-online-free/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div class="calculator-info">
+              <h4>AI Image Watermark Remover: Remove Watermark from Photos Online Free</h4>
+              <p>Free online AI watermark remover tool. Instantly erase logos, text,...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/emergency-fund-calculator-how-much-to-save-time-to-goal/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="calculator-info">
+              <h4>Emergency Fund Calculator: How Much to Save &#038; Time to Goal</h4>
+              <p>Free emergency fund calculator to determine how much you should...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/savings-goal-calculator-time-to-reach-your-target/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-flask"></i></div>
+            <div class="calculator-info">
+              <h4>Savings Goal Calculator: Time to Reach Your Target</h4>
+              <p>Free savings goal calculator to estimate how long it will...</p>
+            </div>
+          </a>
+                  <a href="https://www.nimbuscalc.com/tool/budgeting-calculator-monthly-expenses-income-tracker/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="calculator-info">
+              <h4>Budgeting Calculator: Monthly Expenses &#038; Income Tracker</h4>
+              <p>Free monthly budget calculator to track income and expenses. Plan...</p>
+            </div>
+          </a>
+            </div>
+  </div>
+</section>
+
+  
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>All Calculators</h2>
+        <p>Complete list of all 1198+ calculators</p> 
+      </div>
+      
+      
+      <div class="ad-container inline-ad" style="position: relative;">
+        <span class="ad-label"><script src="https://www.nimbuscalc.com/js/calecenter.js"></script></span>
+      </div>
+
+      
+      <div class="category-section" style="margin-bottom: var(--spacing-3xl);">
+        <h3 style="margin-bottom: var(--spacing-lg); display: flex; align-items: center; gap: var(--spacing-sm);">
+          <i class="fas fa-user" style="color: var(--primary-purple);"></i>
+          Body Composition (27)
+        </h3>
+        <div class="calculators-grid">
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/bmi-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-weight"></i></div>
+            <div class="calculator-info"><h4>BMI Calculator</h4><p>Body Mass Index calculation</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/body-fat-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-percentage"></i></div>
+            <div class="calculator-info"><h4>Body Fat Calculator</h4><p>Estimate body fat percentage</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/navy-body-fat-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-ship"></i></div>
+            <div class="calculator-info"><h4>Navy Body Fat</h4><p>Military method body fat</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/army-body-fat-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="calculator-info"><h4>Army Body Fat</h4><p>Army standard body fat</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/waist-hip-ratio-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-ruler-horizontal"></i></div>
+            <div class="calculator-info"><h4>Waist-to-Hip Ratio</h4><p>Assess fat distribution</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/ideal-weight-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-balance-scale"></i></div>
+            <div class="calculator-info"><h4>Ideal Weight</h4><p>Calculate target weight</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/bsa-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-expand"></i></div>
+            <div class="calculator-info"><h4>Body Surface Area</h4><p>BSA for medication dosing</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/body-water-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-tint"></i></div>
+            <div class="calculator-info"><h4>Body Water %</h4><p>Estimate hydration levels</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/lean-body-mass-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-dumbbell"></i></div>
+            <div class="calculator-info"><h4>Lean Body Mass</h4><p>Calculate fat-free mass</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/skeletal-muscle-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-running"></i></div>
+            <div class="calculator-info"><h4>Skeletal Muscle %</h4><p>Estimate muscle percentage</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/child-bmi-percentile/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-child"></i></div>
+            <div class="calculator-info"><h4>Child BMI Percentile</h4><p>CDC growth assessment</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/child-height-percentile/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-ruler-vertical"></i></div>
+            <div class="calculator-info"><h4>Child Height %</h4><p>Age-based height percentile</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/child-weight-percentile/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-weight"></i></div>
+            <div class="calculator-info"><h4>Child Weight %</h4><p>Age-based weight percentile</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/tanner-stage-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-user-clock"></i></div>
+            <div class="calculator-info"><h4>Tanner Stage</h4><p>Puberty development</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/metabolic-age-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-hourglass-half"></i></div>
+            <div class="calculator-info"><h4>Metabolic Age</h4><p>Compare metabolic health</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/visceral-fat-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="calculator-info"><h4>Visceral Fat Level</h4><p>Internal fat risk</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/body-shape-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-apple-alt"></i></div>
+            <div class="calculator-info"><h4>Body Shape</h4><p>Apple or pear shape</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/waist-height-ratio/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-ruler"></i></div>
+            <div class="calculator-info"><h4>Waist-to-Height</h4><p>Health risk indicator</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/infant-weight-percentile/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-baby"></i></div>
+            <div class="calculator-info"><h4>Infant Weight %</h4><p>WHO growth standards</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/infant-length-percentile/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-ruler"></i></div>
+            <div class="calculator-info"><h4>Infant Length %</h4><p>WHO length standards</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/head-circumference-percentile/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-circle"></i></div>
+            <div class="calculator-info"><h4>Head Circumference</h4><p>Brain development tracking</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/arm-circumference-percentile/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-hand-paper"></i></div>
+            <div class="calculator-info"><h4>Arm Circumference</h4><p>Nutrition status check</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/skinfold-thickness-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-hand-pointer"></i></div>
+            <div class="calculator-info"><h4>Skinfold Thickness</h4><p>Body fat via calipers</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/bri-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-circle-notch"></i></div>
+            <div class="calculator-info"><h4>Body Roundness Index</h4><p>BRI calculation</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/absi-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-shapes"></i></div>
+            <div class="calculator-info"><h4>ABSI Calculator</h4><p>Body shape index</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/ponderal-index-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calculator"></i></div>
+            <div class="calculator-info"><h4>Ponderal Index</h4><p>Alternative to BMI</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/body-composition/corpulence-index-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-weight-hanging"></i></div>
+            <div class="calculator-info"><h4>Corpulence Index</h4><p>Rohrer's index</p></div>
+          </a>
+        </div>
+      </div>
+
+      
+      <div class="category-section" style="margin-bottom: var(--spacing-3xl);">
+        <h3 style="margin-bottom: var(--spacing-lg); display: flex; align-items: center; gap: var(--spacing-sm);">
+          <i class="fas fa-apple-alt" style="color: var(--secondary-teal);"></i>
+          Nutrition & Metabolism (30)
+        </h3>
+        <div class="calculators-grid">
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/calorie-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-fire"></i></div>
+            <div class="calculator-info"><h4>Calorie Calculator</h4><p>Daily calorie needs</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/bmr-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="calculator-info"><h4>BMR Calculator</h4><p>Basal metabolic rate</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/rmr-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-bed"></i></div>
+            <div class="calculator-info"><h4>RMR Calculator</h4><p>Resting metabolic rate</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/tdee-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-bolt"></i></div>
+            <div class="calculator-info"><h4>TDEE Calculator</h4><p>Total daily energy</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/macro-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-chart-pie"></i></div>
+            <div class="calculator-info"><h4>Macro Calculator</h4><p>Protein/carbs/fats</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/protein-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-drumstick-bite"></i></div>
+            <div class="calculator-info"><h4>Protein Calculator</h4><p>Daily protein needs</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/carb-cycling-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-sync-alt"></i></div>
+            <div class="calculator-info"><h4>Carb Cycling</h4><p>High/low carb days</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/keto-ratio-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-bacon"></i></div>
+            <div class="calculator-info"><h4>Keto Ratio</h4><p>Ketogenic diet macros</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/glycemic-index-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="calculator-info"><h4>Glycemic Index</h4><p>Food GI values</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/glycemic-load-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-wave-square"></i></div>
+            <div class="calculator-info"><h4>Glycemic Load</h4><p>Blood sugar impact</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/water-intake-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-glass-whiskey"></i></div>
+            <div class="calculator-info"><h4>Water Intake</h4><p>Daily hydration needs</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/caffeine-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-coffee"></i></div>
+            <div class="calculator-info"><h4>Caffeine Safety</h4><p>Safe caffeine limits</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/alcohol-calorie-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-wine-glass"></i></div>
+            <div class="calculator-info"><h4>Alcohol Calories</h4><p>Calories in drinks</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/alcohol-metabolism-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-clock"></i></div>
+            <div class="calculator-info"><h4>Alcohol Metabolism</h4><p>Time to sober up</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/food-calorie-lookup/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-search"></i></div>
+            <div class="calculator-info"><h4>Food Calories</h4><p>Calorie database</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/exercise-calorie-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-burn"></i></div>
+            <div class="calculator-info"><h4>Exercise Calories</h4><p>Calories burned</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/cycling-calorie-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-bicycle"></i></div>
+            <div class="calculator-info"><h4>Cycling Calories</h4><p>Bike ride energy</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/running-calorie-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-running"></i></div>
+            <div class="calculator-info"><h4>Running Calories</h4><p>Running energy burn</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/swimming-calorie-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-swimmer"></i></div>
+            <div class="calculator-info"><h4>Swimming Calories</h4><p>Pool workout energy</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/steps-to-distance/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-shoe-prints"></i></div>
+            <div class="calculator-info"><h4>Steps to Distance</h4><p>Convert steps to km/mi</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/steps-to-calories/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-walking"></i></div>
+            <div class="calculator-info"><h4>Steps to Calories</h4><p>Walking energy burn</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/calorie-deficit-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-arrow-down"></i></div>
+            <div class="calculator-info"><h4>Calorie Deficit</h4><p>Weight loss planning</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/weight-loss-timeline/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div class="calculator-info"><h4>Weight Loss Timeline</h4><p>Reach your goal</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/weight-gain-planner/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-arrow-up"></i></div>
+
+            <div class="calculator-info"><h4>Weight Gain Planner</h4><p>Muscle building plan</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/fiber-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-leaf"></i></div>
+            <div class="calculator-info"><h4>Fiber Calculator</h4><p>Daily fiber needs</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/sodium-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-salt-shaker"></i></div>
+            <div class="calculator-info"><h4>Sodium Intake</h4><p>Salt consumption</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/sugar-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-candy-cane"></i></div>
+            <div class="calculator-info"><h4>Sugar Intake</h4><p>Daily sugar limits</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/pregnancy-nutrition/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-baby-carriage"></i></div>
+            <div class="calculator-info"><h4>Pregnancy Nutrition</h4><p>Expecting mothers</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/breastfeeding-calories/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-female"></i></div>
+            <div class="calculator-info"><h4>Breastfeeding Calories</h4><p>Nursing nutrition</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/nutrition/recipe-nutrition/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-utensils"></i></div>
+            <div class="calculator-info"><h4>Recipe Nutrition</h4><p>Analyze recipes</p></div>
+          </a>
+        </div>
+      </div>
+
+      
+      <div class="category-section" style="margin-bottom: var(--spacing-3xl);">
+        <h3 style="margin-bottom: var(--spacing-lg); display: flex; align-items: center; gap: var(--spacing-sm);">
+          <i class="fas fa-running" style="color: var(--accent-blue);"></i>
+          Fitness & Performance (20)
+        </h3>
+        <div class="calculators-grid">
+          <a href="https://www.nimbuscalc.com/calculators/fitness/max-heart-rate/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="calculator-info"><h4>Max Heart Rate</h4><p>Age-based MHR</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/target-heart-rate/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-heart"></i></div>
+            <div class="calculator-info"><h4>Target Heart Rate</h4><p>Training zones</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/karvonen-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-wave-square"></i></div>
+            <div class="calculator-info"><h4>Karvonen Formula</h4><p>Heart rate reserve</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/heart-rate-recovery/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-stopwatch"></i></div>
+            <div class="calculator-info"><h4>HR Recovery</h4><p>Fitness indicator</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/one-rep-max-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-dumbbell"></i></div>
+            <div class="calculator-info"><h4>One Rep Max</h4><p>Max strength</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/rep-max-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-weight-hanging"></i></div>
+            <div class="calculator-info"><h4>Rep Max</h4><p>Multiple rep maxes</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/strength-level/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-trophy"></i></div>
+            <div class="calculator-info"><h4>Strength Level</h4><p>Compare strength</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/vo2max-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-lungs"></i></div>
+            <div class="calculator-info"><h4>VO2 Max</h4><p>Cardio fitness</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/running-power-index/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-bolt"></i></div>
+            <div class="calculator-info"><h4>Running Power</h4><p>Power output</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/pace-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-tachometer-alt"></i></div>
+            <div class="calculator-info"><h4>Pace Calculator</h4><p>Running pace</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/race-time-predictor/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-flag-checkered"></i></div>
+            <div class="calculator-info"><h4>Race Predictor</h4><p>Finish time estimate</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/training-volume/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-chart-bar"></i></div>
+            <div class="calculator-info"><h4>Training Volume</h4><p>Workout load</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/training-intensity/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-percentage"></i></div>
+            <div class="calculator-info"><h4>Training Intensity</h4><p>% of 1RM</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/periodization-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calendar-week"></i></div>
+            <div class="calculator-info"><h4>Periodization</h4><p>Training cycles</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/overload-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-arrow-up"></i></div>
+            <div class="calculator-info"><h4>Progressive Overload</h4><p>Load progression</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/deload-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-arrow-down"></i></div>
+            <div class="calculator-info"><h4>Deload Calculator</h4><p>Recovery weeks</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/pushup-test/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-hand-rock"></i></div>
+            <div class="calculator-info"><h4>Push-up Test</h4><p>Upper body endurance</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/situp-test/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-user"></i></div>
+            <div class="calculator-info"><h4>Sit-up Test</h4><p>Core endurance</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/met-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-fire-alt"></i></div>
+            <div class="calculator-info"><h4>MET Calculator</h4><p>Exercise intensity</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/fitness/jumping-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-arrow-up"></i></div>
+            <div class="calculator-info"><h4>Vertical Jump</h4><p>Power assessment</p></div>
+          </a>
+        </div>
+      </div>
+
+      
+      <div class="category-section" style="margin-bottom: var(--spacing-3xl);">
+        <h3 style="margin-bottom: var(--spacing-lg); display: flex; align-items: center; gap: var(--spacing-sm);">
+          <i class="fas fa-heartbeat" style="color: var(--accent-pink);"></i>
+          Pregnancy & Health (30)
+        </h3>
+        <div class="calculators-grid">
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/due-date-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-baby"></i></div>
+            <div class="calculator-info"><h4>Due Date</h4><p>Baby arrival date</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/ovulation-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-egg"></i></div>
+            <div class="calculator-info"><h4>Ovulation</h4><p>Fertile window</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/fertility-window/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="calculator-info"><h4>Fertility Window</h4><p>Best conception days</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/safe-period-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="calculator-info"><h4>Safe Period</h4><p>Natural family planning</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/pregnancy-week-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calendar-week"></i></div>
+            <div class="calculator-info"><h4>Pregnancy Week</h4><p>Current gestational age</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/pregnancy-weight-gain/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-weight"></i></div>
+            <div class="calculator-info"><h4>Pregnancy Weight</h4><p>Healthy gain range</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/fetal-weight-estimator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-baby-carriage"></i></div>
+            <div class="calculator-info"><h4>Fetal Weight</h4><p>Baby size estimate</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/fetal-length-estimator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-ruler"></i></div>
+            <div class="calculator-info"><h4>Fetal Length</h4><p>Baby growth tracking</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/conception-date/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-clock"></i></div>
+            <div class="calculator-info"><h4>Conception Date</h4><p>When conception occurred</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/pregnancy-timeline/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-stream"></i></div>
+            <div class="calculator-info"><h4>Pregnancy Timeline</h4><p>Development milestones</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/apgar-score/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-star"></i></div>
+            <div class="calculator-info"><h4>Apgar Score</h4><p>Newborn assessment</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/newborn-weight-classifier/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-balance-scale"></i></div>
+            <div class="calculator-info"><h4>Newborn Weight</h4><p>Birth weight category</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/infant-feeding/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-baby-bottle"></i></div>
+            <div class="calculator-info"><h4>Infant Feeding</h4><p>Milk volume guide</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/diaper-quantity/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-shopping-basket"></i></div>
+            <div class="calculator-info"><h4>Diaper Quantity</h4><p>How many diapers</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/sleep-requirements/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-bed"></i></div>
+            <div class="calculator-info"><h4>Sleep Requirements</h4><p>Age-based sleep needs</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/infant-sleep/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-moon"></i></div>
+            <div class="calculator-info"><h4>Infant Sleep</h4><p>Baby sleep patterns</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/blood-pressure-category/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="calculator-info"><h4>Blood Pressure</h4><p>BP classification</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/blood-pressure-percentile/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="calculator-info"><h4>BP Percentile</h4><p>Pediatric BP norms</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/blood-glucose-converter/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-exchange-alt"></i></div>
+            <div class="calculator-info"><h4>Glucose Converter</h4><p>mmol/L to mg/dL</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/hba1c-estimator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-vial"></i></div>
+            <div class="calculator-info"><h4>HbA1c Estimator</h4><p>Average glucose</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/diabetes-risk-score/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <div class="calculator-info"><h4>Diabetes Risk</h4><p>Type 2 risk assessment</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/homa-ir-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calculator"></i></div>
+            <div class="calculator-info"><h4>HOMA-IR</h4><p>Insulin resistance</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/quicki-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-tachometer-alt"></i></div>
+            <div class="calculator-info"><h4>QUICKI Index</h4><p>Insulin sensitivity</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/egfr-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-kidney"></i></div>
+            <div class="calculator-info"><h4>eGFR</h4><p>Kidney function</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/creatinine-clearance/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-flask"></i></div>
+            <div class="calculator-info"><h4>Creatinine Clearance</h4><p>Renal function</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/bac-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-wine-glass-alt"></i></div>
+            <div class="calculator-info"><h4>BAC Calculator</h4><p>Blood alcohol content</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/metabolic-syndrome/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-stethoscope"></i></div>
+            <div class="calculator-info"><h4>Metabolic Syndrome</h4><p>Risk assessment</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/cardiovascular-risk/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-heart"></i></div>
+            <div class="calculator-info"><h4>Heart Disease Risk</h4><p>10-year CVD risk</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/osteoporosis-risk/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-bone"></i></div>
+            <div class="calculator-info"><h4>Osteoporosis Risk</h4><p>Bone health</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/phq9-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-brain"></i></div>
+            <div class="calculator-info"><h4>PHQ-9</h4><p>Depression screening</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/pregnancy-health/gad7-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-head-side-virus"></i></div>
+            <div class="calculator-info"><h4>GAD-7</h4><p>Anxiety screening</p></div>
+          </a>
+        </div>
+      </div>
+
+      
+      <div class="category-section">
+        <h3 style="margin-bottom: var(--spacing-lg); display: flex; align-items: center; gap: var(--spacing-sm);">
+          <i class="fas fa-tools" style="color: var(--accent-orange);"></i>
+          Utility Tools (10)
+        </h3>
+        <div class="calculators-grid">
+          <a href="https://www.nimbuscalc.com/calculators/utilities/length-converter/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-ruler"></i></div>
+            <div class="calculator-info"><h4>Length Converter</h4><p>Inches, cm, feet, meters</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/weight-converter/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-weight"></i></div>
+            <div class="calculator-info"><h4>Weight Converter</h4><p>Pounds, kg, ounces, grams</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/temperature-converter/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-thermometer-half"></i></div>
+            <div class="calculator-info"><h4>Temperature</h4><p>Fahrenheit, Celsius, Kelvin</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/volume-converter/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-flask"></i></div>
+            <div class="calculator-info"><h4>Volume Converter</h4><p>ml, oz, cups, liters</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/energy-converter/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-bolt"></i></div>
+            <div class="calculator-info"><h4>Energy Converter</h4><p>Calories, kJ, watts</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/date-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div class="calculator-info"><h4>Date Calculator</h4><p>Add/subtract days</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/age-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-birthday-cake"></i></div>
+            <div class="calculator-info"><h4>Age Calculator</h4><p>Exact age calculation</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/anniversary-calculator/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-gift"></i></div>
+            <div class="calculator-info"><h4>Anniversary</h4><p>Special date tracker</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/birthday-countdown/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-hourglass-start"></i></div>
+            <div class="calculator-info"><h4>Birthday Countdown</h4><p>Days until birthday</p></div>
+          </a>
+          <a href="https://www.nimbuscalc.com/calculators/utilities/time-converter/" class="calculator-card">
+            <div class="calculator-icon"><i class="fas fa-clock"></i></div>
+            <div class="calculator-info"><h4>Time Converter</h4><p>Hours, minutes, seconds</p></div>
+          </a>
+        </div>
+      </div>
+
+      
+      <div class="ad-container inline-ad" style="position: relative; margin-top: var(--spacing-3xl);">
+        <span class="ad-label"><script src="https://www.nimbuscalc.com/js/calebot.js"></script></span>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section" style="background: var(--light-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose NimbusCalc?</h2>
+        <p>Designed for accuracy, speed, and ease of use</p>
+      </div>
+      
+      <div class="categories-grid">
+        <div class="category-card" style="text-align: center;">
+          <div class="category-icon" style="background: linear-gradient(135deg, #22C55E 0%, #4ADE80 100%); margin: 0 auto;">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>Instant Results</h3>
+          <p>Real-time calculations as you type. No page reloads, no waiting.</p>
+        </div>
+        
+        <div class="category-card" style="text-align: center;">
+          <div class="category-icon" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%); margin: 0 auto;">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>Mobile Optimized</h3>
+          <p>Touch-friendly design that works perfectly on all devices.</p>
+        </div>
+        
+        <div class="category-card" style="text-align: center;">
+          <div class="category-icon" style="background: linear-gradient(135deg, #7F56D9 0%, #9B7FE8 100%); margin: 0 auto;">
+            <i class="fas fa-history"></i>
+          </div>
+          <h3>Save History</h3>
+          <p>Your recent calculations are saved locally for quick reference.</p>
+        </div>
+        
+        <div class="category-card" style="text-align: center;">
+          <div class="category-icon" style="background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%); margin: 0 auto;">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+          <h3>Unit Switching</h3>
+          <p>Seamlessly switch between metric and imperial units.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Latest Tips & Guides</h2>
+        <p>Learn how to get the most out of our calculators and improve your health</p>
+      </div>
+
+      <div class="articles-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <a href="https://www.nimbuscalc.com/unlock-predictable-growth-the-complete-guide-to-using-a-customer-lifetime-value-calculator/" class="article-card" style="text-decoration: none; color: inherit; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s;">
+              <div style="padding: 1.5rem;">
+                <span style="font-size: 0.8rem; color: #7F56D9; text-transform: uppercase; letter-spacing: 0.5px;">Guides</span>
+                <h3 style="margin: 0.5rem 0; font-size: 1.2rem;">Unlock Predictable Growth: The Complete Guide to Using a Customer Lifetime Value Calculator</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Understanding how much a customer is truly worth over their entire relationship with your business...</p>
+                <span style="color: #7F56D9; font-weight: 500;">Read more →</span>
+              </div>
+            </a>
+                        <a href="https://www.nimbuscalc.com/optimize-your-subscription-economics-a-complete-guide-to-the-saas-pricing-calculator/" class="article-card" style="text-decoration: none; color: inherit; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s;">
+              <div style="padding: 1.5rem;">
+                <span style="font-size: 0.8rem; color: #14B8A6; text-transform: uppercase; letter-spacing: 0.5px;">Guides</span>
+                <h3 style="margin: 0.5rem 0; font-size: 1.2rem;">Optimize Your Subscription Economics: A Complete Guide to the SaaS Pricing Calculator</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Pricing a software-as-a-service product—or evaluating the cost of tools your team relies on—requires more than...</p>
+                <span style="color: #14B8A6; font-weight: 500;">Read more →</span>
+              </div>
+            </a>
+                        <a href="https://www.nimbuscalc.com/whats-your-number-take-the-iq-test-that-finally-makes-sense/" class="article-card" style="text-decoration: none; color: inherit; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s;">
+              <div style="padding: 1.5rem;">
+                <span style="font-size: 0.8rem; color: #3B82F6; text-transform: uppercase; letter-spacing: 0.5px;">Guides</span>
+                <h3 style="margin: 0.5rem 0; font-size: 1.2rem;">What’s Your Number? Take the IQ Test That Finally Makes Sense</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">🧠 No registration. No pressure. Just 20 questions that reveal something you’ve probably wondered about...</p>
+                <span style="color: #3B82F6; font-weight: 500;">Read more →</span>
+              </div>
+            </a>
+                        <a href="https://www.nimbuscalc.com/cycling-calorie-calculator-know-exactly-what-you-burn/" class="article-card" style="text-decoration: none; color: inherit; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s;">
+              <div style="padding: 1.5rem;">
+                <span style="font-size: 0.8rem; color: #7F56D9; text-transform: uppercase; letter-spacing: 0.5px;">Guides</span>
+                <h3 style="margin: 0.5rem 0; font-size: 1.2rem;">Cycling Calorie Calculator: Know Exactly What You Burn</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">🚴‍♂️ Stop guessing how many calories your ride burns. The Cycling Calorie Calculator gives you...</p>
+                <span style="color: #7F56D9; font-weight: 500;">Read more →</span>
+              </div>
+            </a>
+                        <a href="https://www.nimbuscalc.com/i-found-the-only-ai-watermark-remover-that-actually-works-and-its-free/" class="article-card" style="text-decoration: none; color: inherit; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s;">
+              <div style="padding: 1.5rem;">
+                <span style="font-size: 0.8rem; color: #14B8A6; text-transform: uppercase; letter-spacing: 0.5px;">Guides</span>
+                <h3 style="margin: 0.5rem 0; font-size: 1.2rem;">I Found the Only AI Watermark Remover That Actually Works (And It’s Free)</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">No sign‑ups. No uploads. No Photoshop skills required. A few weeks ago, I was editing...</p>
+                <span style="color: #14B8A6; font-weight: 500;">Read more →</span>
+              </div>
+            </a>
+                        <a href="https://www.nimbuscalc.com/ai-image-watermark-remover-erase-logos-text-instantly/" class="article-card" style="text-decoration: none; color: inherit; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s;">
+              <div style="padding: 1.5rem;">
+                <span style="font-size: 0.8rem; color: #3B82F6; text-transform: uppercase; letter-spacing: 0.5px;">Guides</span>
+                <h3 style="margin: 0.5rem 0; font-size: 1.2rem;">AI Image Watermark Remover: Erase Logos &#038; Text Instantly</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">✨ Finally, a watermark remover that actually works — and it’s completely free. No Photoshop....</p>
+                <span style="color: #3B82F6; font-weight: 500;">Read more →</span>
+              </div>
+            </a>
+                        <a href="https://www.nimbuscalc.com/nimbuscalc-6-3-25-the-all-in-one-android-calculator-that-does-it-all/" class="article-card" style="text-decoration: none; color: inherit; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s;">
+              <div style="padding: 1.5rem;">
+                <span style="font-size: 0.8rem; color: #7F56D9; text-transform: uppercase; letter-spacing: 0.5px;">Guides</span>
+                <h3 style="margin: 0.5rem 0; font-size: 1.2rem;">NimbusCalc 6.3.25: The All‑in‑One Android Calculator That Does It All</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">NimbusCalc 6.3.25: The All‑in‑One Android Calculator That Does It All By NimbusCalc Team · Updated...</p>
+                <span style="color: #7F56D9; font-weight: 500;">Read more →</span>
+              </div>
+            </a>
+                        <a href="https://www.nimbuscalc.com/what-is-your-net-worth-really-use-this-simple-tool-to-uncover-your-true-financial-health/" class="article-card" style="text-decoration: none; color: inherit; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s;">
+              <div style="padding: 1.5rem;">
+                <span style="font-size: 0.8rem; color: #14B8A6; text-transform: uppercase; letter-spacing: 0.5px;">Guides</span>
+                <h3 style="margin: 0.5rem 0; font-size: 1.2rem;">What is Your Net Worth Really? Use This Simple Tool to Uncover Your True Financial Health</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">In the world of personal finance, we often focus on the wrong numbers. We obsess...</p>
+                <span style="color: #14B8A6; font-weight: 500;">Read more →</span>
+              </div>
+            </a>
+                  </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://www.nimbuscalc.com/tool-type/guides/" class="btn btn-secondary" style="display: inline-block; padding: 0.75rem 1.5rem; border: 1px solid #e5e7eb; border-radius: 30px; text-decoration: none; color: #374151; font-weight: 500;">View all guides →</a>
+      </div>
+    </div>
+  </section>
+  
+
+  
+  <div id="search-modal" class="search-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center; padding: var(--spacing-lg);">
+    <div style="background: white; border-radius: var(--radius-lg); width: 100%; max-width: 600px; max-height: 80vh; overflow: hidden;">
+      <div style="padding: var(--spacing-lg); border-bottom: 1px solid var(--light-bg-alt); display: flex; align-items: center; gap: var(--spacing-md);">
+        <i class="fas fa-search" style="color: var(--text-muted);"></i>
+        <input type="text" id="search-input" placeholder="Search calculators..." style="flex: 1; border: none; outline: none; font-size: 1.1rem;">
+        <button onclick="document.getElementById('search-modal').classList.remove('active')" style="background: none; border: none; cursor: pointer; font-size: 1.25rem; color: var(--text-muted);">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="search-results" style="padding: var(--spacing-md); overflow-y: auto; max-height: 50vh;">
+        
+      </div>
+    </div>
+  </div>
+
+  
+  <footer class="footer">
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="https://www.nimbuscalc.com" class="logo">
+                    <div class="logo-icon"><img alt="NimbusCalc" src="https://www.nimbuscalc.com/css/logo.png" width="42" /></div>
+                    <span>NimbusCalc</span>
+                </a>
+                <p>Your trusted source for free online calculators. Accurate, fast, and easy to use tools for every calculation need.</p>
+                <hr>
+                <p><a href="https://www.nimbuscalc.com/nimbuscalc-browser-the-ultimate-web-experience/">NimbusCalc Browser</a>： Redefining speed, privacy & versatility — the browser that does it all.</p>
+                    <p><a href="https://www.ws-expo.com">VanSon Group</a></p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="https://www.nimbuscalc.com/#body-composition">Body Composition</a></li>
+                    <li><a href="https://www.nimbuscalc.com/#nutrition">Nutrition</a></li>
+                    <li><a href="https://www.nimbuscalc.com/#fitness">Fitness</a></li>
+                    <li><a href="https://www.nimbuscalc.com/#pregnancy">Pregnancy & Health</a></li>
+                    <li><a href="https://www.nimbuscalc.com/#utilities">Utilities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="https://www.nimbuscalc.com/about/">About Us</a></li>
+                    <li><a href="https://www.nimbuscalc.com/contact/">Contact</a></li>
+                    <li><a href="https://www.nimbuscalc.com/privacy/">Privacy Policy</a></li>
+                    <li><a href="https://www.nimbuscalc.com/terms/">Terms of Service</a></li>
+                    <li><a href="https://www.nimbuscalc.com/disclaimer/">Disclaimer</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/people/Calc-Nimbus/61585536525277/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/@NimbusCalc" aria-label="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/nimbuscalc/" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <br>
+                <p><a href="https://www.nimbuscalc.com/advertise-with-us/"><i class="fas fa-bullhorn"></i> Advertise with Us</a></p>
+                <p><a href="https://www.nimbuscalc.com/calculators/"><i class="fas fa-list-ul"></i> Calculators:</a> Explore our collection of tools and resources.</p>
+                <p><a href="https://www.nimbuscalc.com/nimbuscalc-6-3-25-the-all-in-one-android-calculator-that-does-it-all/"><i class="fas fa-mobile-alt"></i> NimbusCalc for Android</a> – the all‑in‑one calculator app.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 <a href="https://www.nimbuscalc.com">NimbusCalc</a>. All rights reserved.</p>
+            <p>Made with <i class="fas fa-heart" style="color: var(--accent-pink);"></i> for accurate calculations</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    var calculatorsData = [];
+    console.log('Calculators loaded: ' + calculatorsData.length); // for debugging
+</script>
+  <script src="https://www.nimbuscalc.com/js/data.js"></script>
+    </footer>
+
+  <script src="https://www.nimbuscalc.com/js/main.js"></script>
+</body>
+</html>
