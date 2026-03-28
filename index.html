@@ -84,73 +84,7 @@
 
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 
-    const favoriteBtn = document.getElementById('nav-favorite-btn');
-    if (favoriteBtn) {
-        const postId = favoriteBtn.dataset.postId;
-        let isSaved = favoriteBtn.dataset.saved === '1';
-        const ajaxUrl = 'https://www.nimbuscalc.com/wp-admin/admin-ajax.php';
-        const nonce = favoriteBtn.dataset.nonce;
-
-        function updateFavoriteUI(saved) {
-            if (saved) {
-                favoriteBtn.dataset.saved = '1';
-                favoriteBtn.setAttribute('title', 'Saved');
-                isSaved = true;
-            } else {
-                favoriteBtn.dataset.saved = '0';
-                favoriteBtn.setAttribute('title', 'Save to favorites');
-                isSaved = false;
-            }
-        }
-
-        favoriteBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const action = isSaved ? 'remove_saved_tool' : 'save_tool';
-
-            const formData = new URLSearchParams();
-            formData.append('action', action);
-            formData.append('tool_id', postId);
-            formData.append('nonce', nonce);
-
-            fetch(ajaxUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: formData.toString()
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    updateFavoriteUI(!isSaved);
-                } else {
-                    if (data.data && data.data.includes('logged in')) {
-                        if (confirm('Please log in to save favorites. Go to login page?')) {
-                            window.location.href = 'https://www.nimbuscalc.com/login/';
-                        }
-                    } else {
-                        alert('Error: ' + (data.data || 'Operation failed'));
-                    }
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                alert('Network error. Please try again.');
-            });
-        });
-    }
-
-    // 
-    const dashboardBtn = document.getElementById('nav-dashboard-btn');
-    if (dashboardBtn) {
-        dashboardBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-                            window.location.href = 'https://www.nimbuscalc.com/member-dashboard/';
-                    });
-    }
-});
-</script>  <section class="hero">
+  <section class="hero">
     <div class="hero-bg">
       <div class="hero-grid"></div>
       <div class="hero-particles"></div>
